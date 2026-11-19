@@ -112,12 +112,17 @@
         doc.body.style.overflow = 'hidden';
       };
       if (sourceImg && document.startViewTransition && !reduced) {
-        sourceImg.style.viewTransitionName = 'piece-flight';
-        cardImg.style.viewTransitionName = 'piece-flight';
-        var vt = document.startViewTransition(put);
-        vt.finished.finally(function () {
-          sourceImg.style.viewTransitionName = ''; cardImg.style.viewTransitionName = '';
-        });
+        try {
+          sourceImg.style.viewTransitionName = 'piece-flight';
+          var vt = document.startViewTransition(function () {
+            cardImg.style.viewTransitionName = 'piece-flight';
+            put();
+          });
+          vt.finished.catch(function () {}).finally(function () {
+            sourceImg.style.viewTransitionName = '';
+            cardImg.style.viewTransitionName = '';
+          });
+        } catch (err) { put(); }
       } else { put(); }
     };
     var close = function () {
