@@ -111,18 +111,21 @@
         modal.classList.add('open');
         doc.body.style.overflow = 'hidden';
       };
-      if (sourceImg && document.startViewTransition && !reduced) {
+      if (sourceImg && !reduced) {
         try {
-          sourceImg.style.viewTransitionName = 'piece-flight';
-          var vt = document.startViewTransition(function () {
-            cardImg.style.viewTransitionName = 'piece-flight';
-            put();
-          });
-          vt.finished.catch(function () {}).finally(function () {
-            sourceImg.style.viewTransitionName = '';
-            cardImg.style.viewTransitionName = '';
-          });
-        } catch (err) { put(); }
+          var a = sourceImg.getBoundingClientRect();
+          put();
+          var b = cardImg.getBoundingClientRect();
+          var sx = a.width / b.width, sy = a.height / b.height;
+          var dx = (a.left + a.width / 2) - (b.left + b.width / 2);
+          var dy = (a.top + a.height / 2) - (b.top + b.height / 2);
+          cardImg.animate([
+            { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + sx.toFixed(3) + ',' + sy.toFixed(3) + ')' },
+            { transform: 'none' }
+          ], { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        } catch (err) {
+          if (!document.getElementById('detail').classList.contains('open')) put();
+        }
       } else { put(); }
     };
     var close = function () {
