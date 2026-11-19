@@ -307,6 +307,18 @@
       var apply = function () {
         var newMain = doc.importNode(dp.querySelector('main'), true);
         doc.querySelector('main').replaceWith(newMain);
+        var oldDetail = doc.getElementById('detail');
+        if (oldDetail) oldDetail.remove();
+        var oldData = doc.getElementById('pieces-data');
+        if (oldData) oldData.remove();
+        var newDetail = dp.getElementById('detail');
+        if (newDetail) {
+          newDetail = doc.importNode(newDetail, true);
+          var nd = dp.getElementById('pieces-data');
+          if (nd) newDetail.after(doc.importNode(nd, true));
+          var foot = doc.querySelector('footer');
+          foot.parentNode.insertBefore(newDetail, foot);
+        }
         var path = href.split('#')[0];
         doc.querySelectorAll('.nav-links a, #menu a').forEach(function (a) {
           var same = a.getAttribute('href').split('#')[0] === path;
