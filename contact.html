@@ -16,10 +16,10 @@
 <div id="ambient" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 <div id="cursor-light" aria-hidden="true"></div>
 <div id="intro" aria-hidden="true">
-  <div style="display:grid;place-items:center">
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A44C"/><stop offset="1" stop-color="#8FE3DC"/></linearGradient></defs><path class="mark-glass" d="M16 3C9 3 4.5 8.5 4.5 15.5 4.5 23.5 9.5 29 16 29s11.5-5.5 11.5-13.5C27.5 8.5 23 3 16 3Z" stroke="currentColor" stroke-width="1.6"/><path class="mark-fil" pathLength="1" d="M12.5 22v-4.5L16 14l3.5 3.5V22" stroke="url(#ig)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <div class="intro-glass"><i></i></div>
-  </div>
+  <canvas id="intro-canvas"></canvas>
+  <div class="intro-line"></div>
+  <div class="intro-word"><span style="--i:0">L</span><span style="--i:1">U</span><span style="--i:2">M</span><span style="--i:3">E</span><span style="--i:4">N</span></div>
+  <div class="intro-bar intro-bar-t"></div><div class="intro-bar intro-bar-b"></div>
   <p class="intro-skip">Click anywhere to skip</p>
 </div>
 <nav class="nav glass" aria-label="Main">
