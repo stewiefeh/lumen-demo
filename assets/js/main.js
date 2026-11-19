@@ -313,11 +313,10 @@
         if (oldData) oldData.remove();
         var newDetail = dp.getElementById('detail');
         if (newDetail) {
-          newDetail = doc.importNode(newDetail, true);
-          var nd = dp.getElementById('pieces-data');
-          if (nd) newDetail.after(doc.importNode(nd, true));
           var foot = doc.querySelector('footer');
-          foot.parentNode.insertBefore(newDetail, foot);
+          var nd = dp.getElementById('pieces-data');
+          if (nd) foot.parentNode.insertBefore(doc.importNode(nd, true), foot);
+          foot.parentNode.insertBefore(doc.importNode(newDetail, true), foot);
         }
         var path = href.split('#')[0];
         doc.querySelectorAll('.nav-links a, #menu a').forEach(function (a) {
